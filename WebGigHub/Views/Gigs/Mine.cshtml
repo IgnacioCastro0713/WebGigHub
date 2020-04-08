@@ -1,0 +1,76 @@
+﻿@model IEnumerable<WebGigHub.Core.Models.Gig>
+@using System.Globalization
+
+@{
+    ViewBag.Title = "Mine";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>My Upcoming Gigs (@Model.Count())</h2>
+<ul class="gigs mt-5">
+    @foreach (var gig in Model)
+    {
+        <li>
+            <div class="date">
+                <div class="month">
+                    @gig.DateTime.ToString("MMM", CultureInfo.InvariantCulture)
+                </div>
+                <div class="day">
+                    @gig.DateTime.Day
+                </div>
+            </div>
+
+            <div class="details">
+                <span class="artist">
+                    @gig.Venue
+                </span>
+                <span class="genre">
+                    @gig.Genre.Name
+                </span>
+                <div class="actions">
+                    <a href="@Url.Action("Edit", "Gigs", new {id = gig.Id})">Edit</a>|
+                    <a href="#" class="js-cancel-gig" data-gig-id="@gig.Id">Cancel</a>
+                </div>
+            </div>
+        </li>
+    }
+</ul>
+@section scripts
+{
+    <script>
+    window.onload = function() {
+      $(".js-cancel-gig").click(function(e) {
+          let button = $(e.target);
+          bootbox.confirm({
+          message:"Are you sure you want to delete this gig?",
+          title: "Confirm",
+          buttons: {
+              confirm: {
+                  label: 'Delete',
+                  className: 'btn-danger'
+            },
+            cancel: {
+                label: 'Cancel',
+                className: 'btn-default'
+            }
+          },
+          callback: function(result){ 
+              if (result) {
+                  $.ajax("/api/gigs/" + button.attr("data-gig-id"),{
+                      method: "DELETE"
+                  })
+                  .done(function() {
+                      button.parents("li")
+                      .fadeOut(function() {
+                        $(this).remove();
+                      })
+                  })
+                  .fail(function() {
+                      alert("Something failed!")
+                  });
+              }
+          }});
+      })
+    }
+    </script>
+}
