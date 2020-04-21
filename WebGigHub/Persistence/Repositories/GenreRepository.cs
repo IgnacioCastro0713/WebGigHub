@@ -9,9 +9,9 @@ namespace WebGigHub.Persistence.Repositories
     public class GenreRepository : IGenreRepository
     {
         
-        private readonly ApplicationDbContext _context;
+        private readonly IApplicationDbContext _context;
         
-        public GenreRepository(ApplicationDbContext context) => _context = context;
+        public GenreRepository(IApplicationDbContext context) => _context = context;
 
         public Task<List<Genre>> GetGenres()
         {

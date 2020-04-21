@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using WebGigHub.Core.Models;
 using WebGigHub.Core.ViewModels;
 using WebGigHub.Persistence;
 using WebGigHub.Persistence.Repositories;

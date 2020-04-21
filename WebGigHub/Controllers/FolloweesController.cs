@@ -1,31 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Threading.Tasks;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using WebGigHub.Core.Models;
-using WebGigHub.Persistence;
+using WebGigHub.Core;
 
 namespace WebGigHub.Controllers
 {
     public class FolloweesController : Controller
     {
         
-        private readonly ApplicationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public FolloweesController() => _context = new ApplicationDbContext();
-        
+        public FolloweesController(IUnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
+
         [Authorize]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             var userId = User.Identity.GetUserId();
-
-            var artist = _context.Followings
-                .Where(f => f.FollowerId == userId)
-                .Select(f => f.Followee)
-                .ToList();
-            
+            var artist = await _unitOfWork.FolloweeRepository.GetFolloweesByFollowerId(userId);
             return View(artist);
         }
     }

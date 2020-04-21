@@ -9,6 +9,7 @@ namespace WebGigHub.Core
         IAttendanceRepository AttendanceRepository { get; }
         IGenreRepository GenreRepository { get; }
         IFollowingRepository FollowingRepository { get; }
+        IFolloweeRepository FolloweeRepository { get; }
         Task Complete();
     }
 }

@@ -6,7 +6,6 @@ using System.Web.Mvc;
 using WebGigHub.Core;
 using WebGigHub.Core.Models;
 using WebGigHub.Core.ViewModels;
-using WebGigHub.Persistence;
 
 namespace WebGigHub.Controllers
 {

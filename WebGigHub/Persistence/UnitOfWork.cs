@@ -14,6 +14,8 @@ namespace WebGigHub.Persistence
         public IAttendanceRepository AttendanceRepository  { get; private set; }
         public IGenreRepository GenreRepository { get; private set; }
         public IFollowingRepository FollowingRepository { get; private set; }
+
+        public IFolloweeRepository FolloweeRepository { get; private set; }
         
 
         public UnitOfWork(ApplicationDbContext context)
@@ -23,6 +25,7 @@ namespace WebGigHub.Persistence
            AttendanceRepository = new AttendanceRepository(_context);
            GenreRepository = new GenreRepository(_context);
            FollowingRepository = new FollowingRepository(_context);
+           FolloweeRepository = new FolloweeRepository(_context);
         }
 
         public async Task Complete()

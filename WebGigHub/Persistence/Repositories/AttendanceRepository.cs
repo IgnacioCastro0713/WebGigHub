@@ -10,9 +10,9 @@ namespace WebGigHub.Persistence.Repositories
 {
     public class AttendanceRepository : IAttendanceRepository
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IApplicationDbContext _context;
 
-        public AttendanceRepository(ApplicationDbContext context) => _context = context;
+        public AttendanceRepository(IApplicationDbContext context) => _context = context;
 
         public IEnumerable<Attendance> GetFutureAttendances(string userId)
         {
