@@ -11,6 +11,7 @@ namespace WebGigHub.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using Ninject.Web.Common.WebHost;
+    // add this line
     using Ninject.Extensions.Conventions;
 
     public static class NinjectWebCommon 
